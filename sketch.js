@@ -1,5 +1,6 @@
 let tiempoVer = 2;
 const tiempoAdivinar = 5;
+
 let colorAleatorio = 0;
 let formaAleatorio = 0;
 let colorFalso = 0;
@@ -53,8 +54,12 @@ function draw() {
     textSize(50)
   } 
   else if((frameCount <= 15) && (frameCount > 6)){
+    fill(200);
+    noStroke();
+    dibujoForma(formasSTR[formaAleatorio]);
     fill(colores[colorFalso]);
-    dibujoForma(formasSTR[formaAleatorio], colorFalso);
+    stroke(0);
+    dibujoFormaMini(formasSTR[formaFalso]);
     text(formasSTR[formaAleatorio], 0, height/2);
     fill(220);
   }
@@ -79,9 +84,14 @@ function ValoresAleatorios(){
   colorAleatorio = int(random(0, 5.99));
   formaAleatorio = int(random(0, 5.99));
   colorFalso = int(random(0, 5.99));
+  formaFalso = int(random(0, 5.99));
+
 
   while(colorFalso == colorAleatorio){
     colorFalso = int(random(0, 5.99));
+  }
+  while(formaFalso == formaAleatorio){
+    formaFalso = int(random(0, 5.99));
   }
 
   print(colorAleatorio, formaAleatorio, colorFalso);
@@ -105,5 +115,26 @@ function dibujoForma(forma){
   }
   else if(forma == "elipse"){
     ellipse(windowWidth/2, windowHeight/2, windowHeight, windowHeight/2);
+  }
+}
+
+function dibujoFormaMini(forma){
+  if(forma == "rombo"){
+     quad(windowWidth/2, windowHeight/3, windowWidth*2/3, windowHeight/2, windowWidth/2, windowHeight*2/3, windowWidth/3, windowHeight/2);
+  }
+  else if(forma == "cuadrado"){
+    square(windowWidth/2, windowHeight/2, windowHeight/5);
+  }
+  else if(forma == "rectángulo"){
+    rect(windowWidth/2, windowHeight/2, windowHeight/3, windowHeight/5);
+  }
+  else if(forma == "trapecio"){
+    quad(windowWidth/4, windowHeight/4, windowWidth*3/4, windowHeight/4, windowWidth*2/3, windowHeight*3/4, windowWidth*1/3, windowHeight*3/4);
+  }
+  else if(forma == "círculo"){
+    circle(windowWidth/2, windowHeight/2, windowHeight/2);
+  }
+  else if(forma == "elipse"){
+    ellipse(windowWidth/2, windowHeight/2, windowHeight/2, windowHeight/3);
   }
 }
