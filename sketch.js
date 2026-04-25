@@ -1,5 +1,8 @@
 let tiempoVer = 2;
 const tiempoAdivinar = 5;
+let correcto = false;
+let click = false;
+let contador = 0;
 
 let colorAleatorio = 0;
 let formaAleatorio = 0;
@@ -12,6 +15,9 @@ let colores = [];
 let coloresSTR = ["Rojo", "Azul", "Rosa", "Verde", "Naranja", "Lila"];
 
 let formasSTR = ["rombo", "cuadrado", "rectángulo", "trapecio", "círculo", "elipse"];
+
+let teclaCol = [87, 65, 83, 68, 70, 71] //w,a,s,d,f,g
+let teclaForm = [38, 40, 39, 37, false, 32] //up,down,right,left,click,space
 
 function setup() {
   createCanvas(windowWidth, windowHeight);
@@ -27,21 +33,33 @@ function setup() {
 
   colores = [rojo, azul, rosa, verde, naranja, lila];
   controlFrames = 0;
-  textSize(50);
   tiempo = 30;
 
 }
 
 function draw() {
-  background(220);
+  CambioRandom();
+  frameRate(3+ contador/2);
+  
+  if (correcto == true){
+      background (0,255,0);
+  }
+  else{
+      background(220);
+  }
+  
   fill(0);
   rectMode(RADIUS);
   tiempo = tiempo - frameCount;
+  textSize(50);
   textAlign(CENTER, CENTER);
+  noStroke();
   text(int (tiempo/3), 50, 50);
   tiempo = 30;
-
-   CambioRandom();
+  
+  textSize(25);
+  text(("Puntos: "+ contador), width-75, 50);
+  textSize(50);
 
 
   if((frameCount <= 6) && (frameCount > 0)){
@@ -56,19 +74,34 @@ function draw() {
   else if((frameCount <= 15) && (frameCount > 6)){
     fill(200);
     noStroke();
+    push();
+    translate (width/2, height/2);
+    scale (1.2);
     dibujoForma(formasSTR[formaAleatorio]);
+    pop();
     fill(colores[colorFalso]);
     stroke(0);
+    push();
+    translate (width/2, height/2);
+    scale (0.8);
     dibujoFormaMini(formasSTR[formaFalso]);
-    text(formasSTR[formaAleatorio], 0, height/2);
+    pop();
     fill(220);
   }
-  else if(frameCount <= 0) {
-    ValoresAleatorios();
+  else if ((frameCount <= 30) && (frameCount > 15)){
+    if (formaAleatorio == 4){
+        if (keyIsDown(teclaCol[colorAleatorio]) === true && click == true){
+          correcto = true;
+        }
+      }
+    else{
+      if (keyIsDown(teclaCol[colorAleatorio]) === true && keyIsDown(teclaForm[formaAleatorio]) === true){
+      correcto = true;
+      }
+    }
   }
 
   fill(220);
-  // print(frameCount);
   if(frameCount > 27){
     frameCount = 0;
   }
@@ -77,6 +110,14 @@ function draw() {
 function CambioRandom(){
   if(frameCount <= 1){
     ValoresAleatorios();
+    if(correcto == true){
+      contador++;
+    }
+    else{
+      contador = 0;
+    }
+    correcto = false;
+    click = false;
   }
 }
 
@@ -93,48 +134,70 @@ function ValoresAleatorios(){
   while(formaFalso == formaAleatorio){
     formaFalso = int(random(0, 5.99));
   }
-
-  print(colorAleatorio, formaAleatorio, colorFalso);
 }
 
 function dibujoForma(forma){
   if(forma == "rombo"){
-     quad(windowWidth/2, windowHeight/4, windowWidth*3/4, windowHeight/2, windowWidth/2, windowHeight*3/4, windowWidth/4, windowHeight/2);
+    quad(
+      0, -windowHeight/4,
+      windowWidth/4, 0,
+      0, windowHeight/4,
+      -windowWidth/4, 0
+    );
   }
   else if(forma == "cuadrado"){
-    square(windowWidth/2, windowHeight/2, windowHeight/3);
+    square(0, 0, windowHeight/3);
   }
   else if(forma == "rectángulo"){
-    rect(windowWidth/2, windowHeight/2, windowHeight/2, windowHeight/4);
+    rect(0, 0, windowHeight/2, windowHeight/4);
   }
   else if(forma == "trapecio"){
-    quad(windowWidth/4, windowHeight/4, windowWidth*3/4, windowHeight/4, windowWidth*2/3, windowHeight*3/4, windowWidth*1/3, windowHeight*3/4);
+    quad(
+      -windowWidth/4, -windowHeight/4,
+       windowWidth/4, -windowHeight/4,
+       windowWidth/6, windowHeight/4,
+      -windowWidth/6, windowHeight/4
+    );
   }
   else if(forma == "círculo"){
-    circle(windowWidth/2, windowHeight/2, windowHeight*3/4);
+    circle(0, 0, windowHeight*3/4);
   }
   else if(forma == "elipse"){
-    ellipse(windowWidth/2, windowHeight/2, windowHeight, windowHeight/2);
+    ellipse(0, 0, windowHeight, windowHeight/2);
   }
 }
 
 function dibujoFormaMini(forma){
   if(forma == "rombo"){
-     quad(windowWidth/2, windowHeight/3, windowWidth*2/3, windowHeight/2, windowWidth/2, windowHeight*2/3, windowWidth/3, windowHeight/2);
+    quad(
+      0, -windowHeight/4,
+      windowWidth/4, 0,
+      0, windowHeight/4,
+      -windowWidth/4, 0
+    );
   }
   else if(forma == "cuadrado"){
-    square(windowWidth/2, windowHeight/2, windowHeight/5);
+    square(0, 0, windowHeight/3);
   }
   else if(forma == "rectángulo"){
-    rect(windowWidth/2, windowHeight/2, windowHeight/3, windowHeight/5);
+    rect(0, 0, windowHeight/2, windowHeight/4);
   }
   else if(forma == "trapecio"){
-    quad(windowWidth/4, windowHeight/4, windowWidth*3/4, windowHeight/4, windowWidth*2/3, windowHeight*3/4, windowWidth*1/3, windowHeight*3/4);
+    quad(
+      -windowWidth/4, -windowHeight/4,
+       windowWidth/4, -windowHeight/4,
+       windowWidth/6, windowHeight/4,
+      -windowWidth/6, windowHeight/4
+    );
   }
   else if(forma == "círculo"){
-    circle(windowWidth/2, windowHeight/2, windowHeight/2);
+    circle(0, 0, windowHeight*3/4);
   }
   else if(forma == "elipse"){
-    ellipse(windowWidth/2, windowHeight/2, windowHeight/2, windowHeight/3);
+    ellipse(0, 0, windowHeight, windowHeight/2);
   }
+}
+
+function mousePressed(){
+  click = true;
 }
