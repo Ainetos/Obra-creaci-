@@ -7,7 +7,6 @@ let contador = 0;
 let colorAleatorio = 0;
 let formaAleatorio = 0;
 let colorFalso = 0;
-let formaFalso = 0;
 let tiempo = 0;
 
 let rojo, azul, rosa, verde, naranja, lila;
@@ -16,11 +15,22 @@ let coloresSTR = ["Rojo", "Azul", "Rosa", "Verde", "Naranja", "Lila"];
 
 let formasSTR = ["rombo", "cuadrado", "rectángulo", "trapecio", "círculo", "elipse"];
 
+<<<<<<< Updated upstream
 let teclaCol = [87, 65, 83, 68, 70, 71] //w,a,s,d,f,g
 let teclaForm = [38, 40, 39, 37, false, 32] //up,down,right,left,click,space
+=======
+function preload(){
+  instagram=loadImage('icono-ig.png')
+  twitter=loadImage('icono-x.png')
+  youtube=loadImage('icono-yt.png')
+  whatsapp=loadImage('icono-wa.png')
+  facebook=loadImage('icono-fb.png')
+  linkedin=loadImage('icono-lk.png')
+}
+>>>>>>> Stashed changes
 
 function setup() {
-  createCanvas(windowWidth, windowHeight);
+createCanvas(windowWidth, windowHeight);
 
   frameRate(3);
 
@@ -80,12 +90,17 @@ function draw() {
     dibujoForma(formasSTR[formaAleatorio]);
     pop();
     fill(colores[colorFalso]);
+<<<<<<< Updated upstream
     stroke(0);
     push();
     translate (width/2, height/2);
     scale (0.8);
     dibujoFormaMini(formasSTR[formaFalso]);
     pop();
+=======
+    dibujoForma(formasSTR[formaAleatorio]);
+    text(formasSTR[formaAleatorio], 0, height/2);
+>>>>>>> Stashed changes
     fill(220);
   }
   else if ((frameCount <= 30) && (frameCount > 15)){
