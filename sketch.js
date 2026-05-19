@@ -15,19 +15,17 @@ let coloresSTR = ["Rojo", "Azul", "Rosa", "Verde", "Naranja", "Lila"];
 
 let formasSTR = ["rombo", "cuadrado", "rectángulo", "trapecio", "círculo", "elipse"];
 
-<<<<<<< Updated upstream
 let teclaCol = [87, 65, 83, 68, 70, 71] //w,a,s,d,f,g
 let teclaForm = [38, 40, 39, 37, false, 32] //up,down,right,left,click,space
-=======
+
 function preload(){
-  instagram=loadImage('icono-ig.png')
-  twitter=loadImage('icono-x.png')
-  youtube=loadImage('icono-yt.png')
-  whatsapp=loadImage('icono-wa.png')
-  facebook=loadImage('icono-fb.png')
-  linkedin=loadImage('icono-lk.png')
+  instagram=loadImage('icono-ig.png');
+  twitter=loadImage('icono-x.png');
+  youtube=loadImage('icono-yt.png');
+  whatsapp=loadImage('icono-wa.png');
+  facebook=loadImage('icono-fb.png');
+  linkedin=loadImage('icono-lk.png');
 }
->>>>>>> Stashed changes
 
 function setup() {
 createCanvas(windowWidth, windowHeight);
@@ -59,6 +57,7 @@ function draw() {
   }
   
   fill(0);
+  imageMode(CENTER);
   rectMode(RADIUS);
   tiempo = tiempo - frameCount;
   textSize(50);
@@ -82,26 +81,7 @@ function draw() {
     textSize(50)
   } 
   else if((frameCount <= 15) && (frameCount > 6)){
-    fill(200);
-    noStroke();
-    push();
-    translate (width/2, height/2);
-    scale (1.2);
     dibujoForma(formasSTR[formaAleatorio]);
-    pop();
-    fill(colores[colorFalso]);
-<<<<<<< Updated upstream
-    stroke(0);
-    push();
-    translate (width/2, height/2);
-    scale (0.8);
-    dibujoFormaMini(formasSTR[formaFalso]);
-    pop();
-=======
-    dibujoForma(formasSTR[formaAleatorio]);
-    text(formasSTR[formaAleatorio], 0, height/2);
->>>>>>> Stashed changes
-    fill(220);
   }
   else if ((frameCount <= 30) && (frameCount > 15)){
     if (formaAleatorio == 4){
@@ -140,76 +120,31 @@ function ValoresAleatorios(){
   colorAleatorio = int(random(0, 5.99));
   formaAleatorio = int(random(0, 5.99));
   colorFalso = int(random(0, 5.99));
-  formaFalso = int(random(0, 5.99));
 
 
   while(colorFalso == colorAleatorio){
     colorFalso = int(random(0, 5.99));
   }
-  while(formaFalso == formaAleatorio){
-    formaFalso = int(random(0, 5.99));
-  }
 }
 
 function dibujoForma(forma){
   if(forma == "rombo"){
-    quad(
-      0, -windowHeight/4,
-      windowWidth/4, 0,
-      0, windowHeight/4,
-      -windowWidth/4, 0
-    );
+    image(instagram,width/2,height/2,200,200);
   }
   else if(forma == "cuadrado"){
-    square(0, 0, windowHeight/3);
+    image(twitter,width/2,height/2,200,200);
   }
   else if(forma == "rectángulo"){
-    rect(0, 0, windowHeight/2, windowHeight/4);
+    image(youtube,width/2,height/2,200,200);
   }
   else if(forma == "trapecio"){
-    quad(
-      -windowWidth/4, -windowHeight/4,
-       windowWidth/4, -windowHeight/4,
-       windowWidth/6, windowHeight/4,
-      -windowWidth/6, windowHeight/4
-    );
+    image(whatsapp,width/2,height/2,200,200);
   }
   else if(forma == "círculo"){
-    circle(0, 0, windowHeight*3/4);
+    image(facebook,width/2,height/2,200,200);
   }
   else if(forma == "elipse"){
-    ellipse(0, 0, windowHeight, windowHeight/2);
-  }
-}
-
-function dibujoFormaMini(forma){
-  if(forma == "rombo"){
-    quad(
-      0, -windowHeight/4,
-      windowWidth/4, 0,
-      0, windowHeight/4,
-      -windowWidth/4, 0
-    );
-  }
-  else if(forma == "cuadrado"){
-    square(0, 0, windowHeight/3);
-  }
-  else if(forma == "rectángulo"){
-    rect(0, 0, windowHeight/2, windowHeight/4);
-  }
-  else if(forma == "trapecio"){
-    quad(
-      -windowWidth/4, -windowHeight/4,
-       windowWidth/4, -windowHeight/4,
-       windowWidth/6, windowHeight/4,
-      -windowWidth/6, windowHeight/4
-    );
-  }
-  else if(forma == "círculo"){
-    circle(0, 0, windowHeight*3/4);
-  }
-  else if(forma == "elipse"){
-    ellipse(0, 0, windowHeight, windowHeight/2);
+    image(linkedin,width/2,height/2,200,200);
   }
 }
 
